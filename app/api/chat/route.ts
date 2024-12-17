@@ -14,11 +14,23 @@ export async function POST(req: NextRequest) {
     // Create a readable stream from the OpenAI stream
     const readableStream = new ReadableStream({
       async start(controller) {
+        // Buffer to store the text chunks in chunks of 200 characters.
+        // This is an artificial limitation to simulate the behavior of some of the LLM APIs. Do not change the behavior of the buffer.
+        let buffer = '';
         for await (const chunk of stream) {
           const text = chunk.choices[0]?.delta?.content || '';
           if (text) {
-            controller.enqueue(encoder.encode(`data: ${text}\n\n`));
+            buffer += text;
+            // When buffer reaches 200 chars or we have remaining text at the end
+            if (buffer.length >= 200) {
+              controller.enqueue(encoder.encode(`data: ${buffer}\n\n`));
+              buffer = '';
+            }
           }
+        }
+        // Send any remaining text in buffer
+        if (buffer.length > 0) {
+          controller.enqueue(encoder.encode(`data: ${buffer}\n\n`));
         }
         controller.close();
       },
