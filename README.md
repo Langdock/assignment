@@ -34,6 +34,7 @@ The starting repository contains a simple chat UI using the OpenAI SDK to genera
 - Use the provided repository as your starting point.  
 - You can import additional libraries if needed.
 - You should use the OpenAI SDK for the interactions with the LLM.
+> Note: You will need an OpenAI API Key to consume the OpenAI models. If you don't have one / can't / don't want to set up an account with OpenAI, please reach out to us and we will provide you with an API key. Generally, make sure to use a cheap model in development (eg. GPT-4o-mini).
 
 ## Evaluation Criteria
 
