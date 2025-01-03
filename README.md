@@ -28,11 +28,6 @@ The starting repository contains a simple chat UI using the OpenAI SDK to genera
 - Below is a screenshot of how the UI could look like.
     ![Chat UI](https://raw.githubusercontent.com/Langdock/assignment/refs/heads/main/img/chat-2.png)
 
-### 3. [Bonus] Streaming Optimization  
-- Optimize the message streaming experience to ensure smooth character-by-character rendering without jumps between chunks. The stream is artificially chunked at 200 characters (simulating LLM behavior). You should handle this in the UI and not change the behavior of the stream.
-- Add a **typing indicator** during streaming.  
-- Render the final message with **Markdown** support.
-
 ## Technical Guidelines
 
 - Use the provided repository as your starting point.  
@@ -66,4 +61,4 @@ Your solution will be evaluated on the following:
    - `nhoelterhoff`  
 
 ## Expectations
-We expect you to spend approximately **3 - 4 hours** on this challenge, focusing on the most relevant aspects of the tasks described above. While you’re welcome to invest more time if you choose, it is **not required**. You are encouraged to **prioritize** specific areas of the challenge based on your strengths and time availability. Typically, you will have until **the end of the next weekend** to submit your solution. Please at latest submit your solution the evening before the interview. If you have any questions or need clarification at any point, please don’t hesitate to reach out to us. Once you submit your solution, we will schedule a **45-minute follow-up call**. During this session, you’ll have the opportunity to walk us through your implementation, and we’ll ask a few technical questions to better understand your approach.
+We expect you to spend approximately **3 - 4 hours** on this challenge, focusing on the most relevant aspects of the tasks described above. While you’re welcome to invest more time if you choose, it is **not required**. You are encouraged to **prioritize** specific areas of the challenge based on your strengths and time availability. Typically, you will have until **the end of the next weekend** to submit your solution. If you have any questions or need clarification at any point, please don’t hesitate to reach out to us. To review your submission, we will schedule a **45-minute follow-up call**. During this session, you’ll have the opportunity to walk us through your implementation, and we’ll ask a few technical questions to better understand your approach. If you already have review call scheduled, please at submit your solution at least the evening before the call.
