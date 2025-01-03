@@ -1,6 +1,6 @@
 # Engineering Assignment
 
-Your task is to enhance a chat UI while adhering to the design principles of the Langdock application. The final submission should include a model selector, message regeneration functionality, and smooth streaming interactions.
+Your task is to enhance a chat UI while adhering to the design principles of the Langdock application. The final submission should include a model selector and message regeneration functionality.
 
 ## Objectives
 
