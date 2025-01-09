@@ -23,7 +23,7 @@ The starting repository contains a simple chat UI using the OpenAI SDK to genera
 - Add functionality to **regenerate messages** in the chat.
 - Implement **message threads**: Users should be able to navigate between message threads. A thread is **not** a new conversation, but a branch within the current conversation. Ensure the conversation history of the current thread is sent to the LLM. You can check the behavior of threads in the Langdock app. You don't have to implement editing messages. You should build a small efficient data structure to store the message threads.
 > Please be aware that this can be quite a rabbit hole. It's okay to keep things simple here and its fine if there are some edge cases remaining that are not handled perfectly. Ideally you are aware of them and can tell us about the limitations of your solution. You should focus on a small solid data structure to store the messages in threads.
-- You don't have to care about persisting conversations anywhere. You can just build some functionality to reset the chat if you want to start a new conversation.
+- You don't have to care about persisting conversations anywhere. You can just build some functionality to reset the chat if you want to start a new conversation. You also don't need a database, it's fine if all data persists in the state / local storage.
 - Allowing users to select a **different model** when regenerating a message is **not required**. A simple regeneration button using the same model is sufficient.  
 - Below is a video of how the interaction with the threads should look like.
 
