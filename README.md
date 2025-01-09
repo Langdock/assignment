@@ -26,8 +26,7 @@ The starting repository contains a simple chat UI using the OpenAI SDK to genera
 - You don't have to care about persisting conversations anywhere. You can just build some functionality to reset the chat if you want to start a new conversation.
 - Allowing users to select a **different model** when regenerating a message is **not required**. A simple regeneration button using the same model is sufficient.  
 - Below is a video of how the interaction with the threads should look like.
-
-https://github.com/user-attachments/assets/1f11e824-6325-41ab-babf-59cfe4213a4c
+  https://github.com/user-attachments/assets/1f11e824-6325-41ab-babf-59cfe4213a4c
 
 ## Technical Guidelines
 
