@@ -16,18 +16,17 @@ The starting repository contains a simple chat UI using the OpenAI SDK to genera
 ### 1. Chat UI Improvement  
 - Enhance the chat UI of the template following the design principles and visual style of the [Langdock application](https://app.langdock.com/) (sign-up for a free account).  
 - You can adapt and improve the UI/UX as needed while drawing inspiration from applications like Linear or ChatGPT.  
-- Implement a **model selector** to allow users to choose between at least two different models.
 - Below is a screenshot of how the UI could look like.
-    ![Chat UI](https://raw.githubusercontent.com/Langdock/assignment/refs/heads/main/img/chat-1.png)
+    ![Chat UI](https://raw.githubusercontent.com/Langdock/assignment/refs/heads/main/img/chat.png)
 
 ### 2. Regenerate Messages  
 - Add functionality to **regenerate messages** in the chat.
-- Allow users to select a **different model** when regenerating a message.  
-- Implement **message threads**: Users should be able to navigate between message threads. Ensure the conversation history of the current thread is sent to the LLM. You can check the behavior of threads in the Langdock app. You don't have to implement editing messages. You should build a small efficient data structure to store the message threads.
+- Implement **message threads**: Users should be able to navigate between message threads. A thread is **not** a new conversation, but a branch within the current conversation. Ensure the conversation history of the current thread is sent to the LLM. You can check the behavior of threads in the Langdock app. You don't have to implement editing messages. You should build a small efficient data structure to store the message threads.
 > Please be aware that this can be quite a rabbit hole. It's okay to keep things simple here and its fine if there are some edge cases remaining that are not handled perfectly. Ideally you are aware of them and can tell us about the limitations of your solution. You should focus on a small solid data structure to store the messages in threads.
 - You don't have to care about persisting conversations anywhere. You can just build some functionality to reset the chat if you want to start a new conversation.
-- Below is a screenshot of how the UI could look like.
-    ![Chat UI](https://raw.githubusercontent.com/Langdock/assignment/refs/heads/main/img/chat-2.png)
+- Allowing users to select a **different model** when regenerating a message is **not required**. A simple regeneration button using the same model is sufficient.  
+- Below is a video of how the interaction with the threads should look like.
+    ![Threads](https://utfs.io/f/2JUUAl7vfqdXQwnF6584a1O7UihTdFvtRgAHxjZGCloqLfsN)
 
 ## Technical Guidelines
 
