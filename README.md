@@ -59,8 +59,7 @@ Your solution will be evaluated on the following:
 2. Make sure the repository is **private**.  
 3. Invite the following users to access your submission:  
    - `karl-richter`  
-   - `jbeiss`  
-   - `nhoelterhoff`  
+   - `balazscsomor`  
 
 ## Expectations
-We expect you to spend approximately **3 - 4 hours** on this challenge, focusing on the most relevant aspects of the tasks described above. While you’re welcome to invest more time if you choose, it is **not required**. You are encouraged to **prioritize** specific areas of the challenge based on your strengths and time availability. Typically, you will have until **the end of the next weekend** to submit your solution. If you have any questions or need clarification at any point, please don’t hesitate to reach out to us. To review your submission, we will schedule a **30-minute follow-up call**. During this session, you’ll have the opportunity to walk us through your implementation, and we’ll ask a few technical questions to better understand your approach. If you already have review call scheduled, please at submit your solution at least the evening before the call.
+We expect you to spend approximately **3 - 4 hours** on this challenge, focusing on the most relevant aspects of the tasks described above. While you’re welcome to invest more time if you choose, it is **not required**. You are encouraged to **prioritize** specific areas of the challenge based on your strengths and time availability. Typically, you will have until **the end of the next weekend** to submit your solution. If you have any questions or need clarification at any point, please don’t hesitate to reach out to us. To review your submission, please schedule a call with the link that has been sent with the email. During this session, you’ll have the opportunity to walk us through your implementation, and we’ll ask a few technical questions to better understand your approach. If you already have review call scheduled, please at submit your solution at least the evening before the call.
