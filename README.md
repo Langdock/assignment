@@ -11,6 +11,25 @@ Your solution should showcase your ability to:
 
 The starting repository contains a simple chat UI using the OpenAI SDK to generate responses. The conversation history is linear and sends only the latest user message to the LLM.
 
+## Local development
+
+Use Node.js 24 or newer (`nvm use` selects Node 24), then run `npm ci`.
+Create `.env.local` with `OPENAI_API_KEY=your-api-key` and run `npm run dev`.
+
+Run `npm run lint`, `npm run typecheck`, and `npm run build` to validate changes.
+Linting runs separately from the Next.js production build.
+
+The template uses Next.js 16, React 19, OpenAI SDK 7, and Tailwind CSS 4.
+Tailwind theme extensions live in `app/globals.css`.
+Tailwind 4 requires Safari 16.4+, Chrome 111+, or Firefox 128+.
+TypeScript stays on version 6 because the current TypeScript ESLint integration
+does not support version 7. ESLint stays on version 9 to match the declared
+peer dependencies of Next's lint plugins.
+
+As of October 20, 2026, npm audit reports an unpatched `braces` advisory through
+Next's development-only ESLint dependency chain. Its suggested automated fix
+downgrades `eslint-config-next` to version 14 and should not be applied.
+
 ## Tasks
 
 ### 1. Chat UI Improvement  
