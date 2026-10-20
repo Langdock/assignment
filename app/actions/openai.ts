@@ -1,14 +1,14 @@
-// src/app/actions/openai.ts
-
 import { OpenAI } from 'openai';
 
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+let openai: OpenAI | undefined;
 
 export async function generateStream(prompt: string) {
   try {
+    // Defer credentials until a request so builds do not need an API key.
+    openai ??= new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: prompt }],
