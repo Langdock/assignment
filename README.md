@@ -1,15 +1,95 @@
-# Engineering Assignment
+# Product Engineering Assignment
 
-Your task is to enhance a chat UI while adhering to the design principles of the Langdock application. The final submission should include a model selector and message regeneration functionality.
+Build a chat experience that helps someone turn an AI response into work they can use.
 
-## Objectives
+At Langdock, product engineers own a customer problem from understanding the need through designing, building, and operating the solution. This exercise gives us a small example of that work: making thoughtful product decisions, delivering a polished interface, and building sound foundations across the stack.
 
-Your solution should showcase your ability to:
-- Write clean, maintainable, and well-documented code.
-- Develop a high-quality and user-friendly interface following design principles.
-- Implement efficient logical structures and data handling.
+## The user problem
 
-The starting repository contains a simple chat UI using the OpenAI SDK to generate responses. The conversation history is linear and sends only the latest user message to the LLM.
+Imagine a customer success manager preparing a follow-up email after a customer meeting. They ask an AI assistant for a draft, ask follow-up questions, and try another response when the first one misses the mark. Today, it is easy to lose a useful answer or become unsure which version a follow-up refers to. Waiting for a response or recovering from a failure can also be confusing.
+
+Build a focused chat experience where this person can explore alternatives, keep their place, and confidently continue from the answer they choose. The scenario should guide your design; you do not need email integration or a specialized email-generation backend.
+
+The starter contains a basic chat UI and a streaming OpenAI endpoint. It currently sends only the latest user message to the model. Treat it as a starting point: assess the existing behavior and improve what matters for the experience below.
+
+## What to build
+
+### 1. A polished conversation experience
+
+Make it feel like a product someone could use every day. We will assess the actual interface and interactions, including:
+
+- Clear visual hierarchy, considered typography and spacing, readable responses, and consistent controls.
+- An inviting empty state, a comfortable message composer, and sensible keyboard and focus behavior.
+- Clear feedback while a response is starting and streaming, with scrolling that lets someone read without fighting the interface.
+- An understandable failure state and a way to recover without losing the user's work.
+- A layout that remains usable on a narrow screen, with accessible labels and visible keyboard focus.
+
+Use the [Langdock app](https://app.langdock.com/) as a reference for quality and visual language. You can also draw inspiration from Linear or ChatGPT. Make your own interaction decisions and be ready to explain them. You may use component libraries; we care about the quality and coherence of the resulting experience.
+
+### 2. Alternative responses without losing context
+
+Let the user regenerate an assistant response, keep the original, and switch between alternatives. Each alternative can lead to its own follow-up conversation. Make the selected alternative and the available navigation understandable in the UI.
+
+At minimum, this flow should work:
+
+1. Send a message and receive a streamed response, A.
+2. Regenerate it to create response B, retaining A.
+3. Continue from B with a follow-up and receive a response using that branch's history.
+4. Switch back to A and continue from it. The follow-up from B must not appear in this branch or be sent as context.
+5. Return to B and find its follow-up conversation intact.
+
+A branch is an alternative path within one conversation. You can limit regeneration to the latest assistant response on the selected path. Switching to an earlier alternative should restore that alternative's existing continuation, if any. You do not need to implement message editing.
+
+Choose a small, explicit data structure for messages, alternatives, and the active path. The model must receive the selected path's conversation history in order. Be ready to explain the invariants your representation preserves and how you retrieve that history. We deliberately leave the representation up to you.
+
+### 3. A dependable client/server boundary
+
+Use the OpenAI SDK from a server-side endpoint and keep credentials on the server. Implement request validation, assemble or validate the selected conversation context at that boundary, and return useful errors for the UI. Consider what happens when a request fails before or during streaming.
+
+For this prototype, the browser may hold the conversation state and send the selected history to the server. Allowing one generation at a time is sufficient; make the behavior explicit when someone tries to submit again or switch branches while a response is running. A late response must not attach to the wrong branch.
+
+Include a few focused automated tests for the important behavior, such as branch isolation and history selection, or invalid requests and failed generations. Choose tests that protect your decisions rather than pursuing a coverage target.
+
+## Scope and time
+
+Spend **3–4 hours**, including validation and a short handover. Stop at the time box and tell us what remains. We value a coherent working flow and deliberate prioritization; adding more features or spending longer does not earn extra credit. If you run short on time, preserve the core flow and explain the gaps.
+
+Use this repository as your starting point with TypeScript, React, Next.js, Tailwind, and the OpenAI SDK. You may add libraries and restructure the code.
+
+One configured model is enough. A model selector, multiple providers, authentication, a database, conversation persistence across reloads, file uploads, tools, deployment, and load testing are **not required**. In-memory state is fine. We will discuss how you would evolve the prototype in the interview; you do not need to build production infrastructure for the take-home.
+
+AI coding tools are welcome. You are responsible for understanding, reviewing, and validating what you submit, and should be able to explain or change it during the review.
+
+## What we evaluate
+
+| Area | What we look for |
+| --- | --- |
+| Product judgment | You understand the user's problem, choose sensible defaults, prioritize the important interactions, and explain what you cut. |
+| UI and UX craft | The interface feels considered and coherent. Navigation, waiting, failure, and recovery are easy to understand; visual polish and interaction quality both matter. |
+| Technical foundations | Branches preserve the right context, state transitions are predictable, and the client/server boundary handles invalid input and failure sensibly. |
+| Engineering judgment | The code is readable, tests cover meaningful risks, and you can explain tradeoffs, limitations, and the next improvements. |
+
+A visually polished happy path alone is incomplete. A technically correct solution also needs care in how people use it. We assess both within the time you had.
+
+## The review conversation
+
+We will start by using the app together, then follow a message through your implementation. Be ready to discuss:
+
+- **Product and design:** Which user need did you prioritize? What did you simplify? What feedback or evidence would tell you whether the experience works?
+- **Data structures:** How are branches represented? How do you select history, preserve continuations, and avoid mixing alternatives? How do time and memory costs change as a conversation grows?
+- **Backend correctness:** What happens on duplicate submissions, a provider timeout, a disconnected client, or a response that arrives after the user switches branches? How would you store this durably and handle two tabs editing the same conversation?
+- **Production and load:** Imagine 1,000 people generating responses at once. What assumptions would you clarify, what would bottleneck first, and how would you measure it? Discuss connection lifetimes, provider limits, bounded retries, cost, and protecting one workspace from another's load. Which changes would you make first, and which would you defer?
+
+These are discussion topics, not extra implementation requirements. We want reasoning grounded in your code and explicit assumptions, rather than a list of infrastructure technologies.
+
+## Submission
+
+1. Create a **private repository** from this template in your GitHub account ([instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)).
+2. Invite `karl-richter` and `balazscsomor`.
+3. Add a short `SUBMISSION.md` with setup or demo instructions, time spent, your main product and technical decisions, known limitations, and what you would do next. A few concise paragraphs or bullets are enough; no slide deck is needed.
+4. Submit by the date agreed in your invitation, and at least the evening before your review call. Use the scheduling link in your invitation if a call has not been booked.
+
+If you need an OpenAI API key or access to the Langdock app, contact us and we will help. Use an inexpensive model during development. Let us know if setup issues prevent you from getting started.
 
 ## Local development
 
@@ -29,56 +109,3 @@ peer dependencies of Next's lint plugins.
 As of October 20, 2026, npm audit reports an unpatched `braces` advisory through
 Next's development-only ESLint dependency chain. Its suggested automated fix
 downgrades `eslint-config-next` to version 14 and should not be applied.
-
-## Tasks
-
-### 1. Chat UI Improvement  
-- Enhance the chat UI of the template following the design principles and visual style of the [Langdock application](https://app.langdock.com/) (sign-up for a free account).  
-- You can adapt and improve the UI/UX as needed while drawing inspiration from applications like Linear or ChatGPT.  
-- Below is a screenshot of how the UI could look like.
-    ![Chat UI](https://raw.githubusercontent.com/Langdock/assignment/refs/heads/main/img/chat.png)
-
-### 2. Message Threads & Regeneration  
-- Add functionality to **regenerate messages** in the chat.
-- Implement **message threads**: Users should be able to navigate between message threads. A thread is **not** a new conversation, but a branch within the current conversation. Ensure the conversation history of the current thread is sent to the LLM. You can check the behavior of threads in the Langdock app. You don't have to implement editing messages. You should build a small efficient data structure to store the message threads.
-> Please be aware that this can be quite a rabbit hole. It's okay to keep things simple here and its fine if there are some edge cases remaining that are not handled perfectly. Ideally you are aware of them and can tell us about the limitations of your solution. You should focus on a small solid data structure to store the messages in threads.
-- You don't have to care about persisting conversations anywhere. You can just build some functionality to reset the chat if you want to start a new conversation. You also don't need a database, it's fine if all data persists in the state / local storage.
-- Allowing users to select a **different model** when regenerating a message is **not required**. A simple regeneration button using the same model is sufficient.  
-- Below is a video of how the interaction with the threads should look like.
-
-https://github.com/user-attachments/assets/1f11e824-6325-41ab-babf-59cfe4213a4c
-
-## Technical Guidelines
-
-- Use the provided repository as your starting point.  
-- You can import additional libraries if needed.
-- You should use the OpenAI SDK for the interactions with the LLM.
-> Note: You will need an OpenAI API Key to consume the OpenAI models. If you don't have one / can't / don't want to set up an account with OpenAI, please reach out to us and we will provide you with an API key. Generally, make sure to use a cheap model in development (eg. GPT-4o-mini).
-
-## Evaluation Criteria
-
-Your solution will be evaluated on the following:
-
-1. **Code Quality**  
-   - Clean, modular code structure.  
-   - TypeScript implementation, error handling, and documentation.  
-
-2. **UI/UX Implementation**  
-   - Design fidelity based on Langdock principles.  
-   - Smooth, responsive, and intuitive interactions.  
-
-3. **Technical Architecture**  
-   - Efficient data structures for managing message threads.
-   - Robust application architecture.
-
-
-## Submission Guidelines
-
-1. Create a new repository from this template to your private GitHub account. Follow [these instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) to create a new repository from a template.  
-2. Make sure the repository is **private**.  
-3. Invite the following users to access your submission:  
-   - `karl-richter`  
-   - `balazscsomor`  
-
-## Expectations
-We expect you to spend approximately **3 - 4 hours** on this challenge, focusing on the most relevant aspects of the tasks described above. While you’re welcome to invest more time if you choose, it is **not required**. You are encouraged to **prioritize** specific areas of the challenge based on your strengths and time availability. Typically, you will have until **the end of the next weekend** to submit your solution. If you have any questions or need clarification at any point, please don’t hesitate to reach out to us. To review your submission, please schedule a call with the link that has been sent with the email. During this session, you’ll have the opportunity to walk us through your implementation, and we’ll ask a few technical questions to better understand your approach. If you already have review call scheduled, please at submit your solution at least the evening before the call.
